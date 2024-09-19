@@ -4,6 +4,7 @@ using CompanyG03DAL.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CompanyG03DAL.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240916070017_AddEmplyeeTable")]
+    partial class AddEmplyeeTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,28 +91,9 @@ namespace CompanyG03DAL.Data.Migrations
                     b.Property<decimal>("Salary")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("WorkForId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("WorkForId");
-
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("CompanyG03DAL.Models.Employee", b =>
-                {
-                    b.HasOne("CompanyG03DAL.Models.Department", "WorkFor")
-                        .WithMany("Employees")
-                        .HasForeignKey("WorkForId");
-
-                    b.Navigation("WorkFor");
-                });
-
-            modelBuilder.Entity("CompanyG03DAL.Models.Department", b =>
-                {
-                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

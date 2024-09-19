@@ -22,12 +22,14 @@ namespace CompanyG03PL.Controllers
             return View(departments);
         }
         [HttpGet]
-        public IActionResult Create() {
-        return View();
-        
+        public IActionResult Create()
+        {
+            return View();
+
         }
         [HttpPost]
-        public IActionResult Create(Department model) {
+        public IActionResult Create(Department model)
+        {
             if (ModelState.IsValid)
             {
                 var count = repository.Add(model);
@@ -36,69 +38,71 @@ namespace CompanyG03PL.Controllers
 
                     return RedirectToAction(nameof(Index));
                 }
-              
+
             }
             return View(model);
-            }
+        }
 
         public IActionResult Details(int? id)
         {
             if (id is null)
                 return BadRequest();
-            else{ 
-                var result= repository.Get(id.Value);
+            else
+            {
+                var result = repository.Get(id.Value);
                 return View(result);
 
             }
 
         }
-      
+
         [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id is null)
             {
-                return BadRequest(); 
+                return BadRequest();
             }
 
             var result = repository.Get(id.Value);
             if (result == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
-            return View(result); 
+            return View(result);
         }
 
-       
+
         [HttpPost]
         public IActionResult Edit(Department model, int? id)
         {
-           
+
             if (id is null || !ModelState.IsValid)
             {
                 if (id is null)
                 {
-                    return BadRequest(); 
+                    return BadRequest();
                 }
 
                 var result = repository.Get(id.Value);
                 return View(result);
             }
 
-           
+
             var count = repository.Update(model);
             if (count > 0)
             {
-                return RedirectToAction(nameof(Index)); 
+                return RedirectToAction(nameof(Index));
             }
 
-          
+
             return View(model);
         }
 
         [HttpGet]
-        public IActionResult Delete(int? id) {
+        public IActionResult Delete(int? id)
+        {
 
             if (id is null)
             {
@@ -118,7 +122,7 @@ namespace CompanyG03PL.Controllers
 
 
         [HttpPost]
-        public IActionResult Delete(Department model,int? id)
+        public IActionResult Delete(Department model, int? id)
         {
 
             if (id is null || !ModelState.IsValid)
@@ -152,5 +156,12 @@ namespace CompanyG03PL.Controllers
 
 
 
-    }
+}
+
+
+
+
+
+
+
 

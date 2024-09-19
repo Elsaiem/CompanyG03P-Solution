@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace CompanyG03DAL.Models
 {
-    public class Department
+    public class Department:BaseEntity
     {
-        public int Id { get; set; }
+       
         [Required(ErrorMessage ="Name is Required")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Code is Required")]
@@ -18,7 +18,7 @@ namespace CompanyG03DAL.Models
         [DisplayName("Date of Creation")]
         public DateTime DateOfCreation { get; set; }
 
-
+        public ICollection<Employee>? Employees { get; set; }
 
 
 

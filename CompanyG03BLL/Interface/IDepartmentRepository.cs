@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace CompanyG03BLL.Interface
 {
-    public interface IDepartmentRepository
+    public interface IDepartmentRepository : IGenericRepository<Department>
     {
-      IEnumerable<Department>GetAll();
-        Department Get(int id);
+        //IEnumerable<Department> GetAll();
+        //Department Get(int id);
 
-        int Add(Department entity);
-        int Update(Department entity);
-        int Delete(Department entity);
-       // object Get(int? id);
-       // int Update(object get);
-    }
+        //int Add(Department entity);
+        //int Update(Department entity);
+        //int Delete(Department entity);
+        //object Get(int? id);
+        //int Update(object get);
+    }  
 }
