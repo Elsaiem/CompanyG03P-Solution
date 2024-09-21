@@ -1,0 +1,23 @@
+﻿@using CompanyG03PL.ViewModels
+@using Microsoft.AspNetCore.Identity
+@model IdentityRole
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details Employee Page</h1>
+<br />
+<br />
+
+<form asp-action="Details">
+    <partial name="RolePartialView/DetailsDeletePartialView" model="Model" />
+
+
+    <br />
+    <a asp-controller="Role" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-light">Back to list</a>
+
+</form>
+
+
+

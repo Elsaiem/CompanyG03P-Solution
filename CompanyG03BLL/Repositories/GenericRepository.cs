@@ -20,39 +20,39 @@ namespace CompanyG03BLL.Repositories
             _Context = context;
 
         }
-        public int Add(T entity)
+        public async Task<int> AddAsync(T entity)
         {
-            _Context.Add(entity);
-            return _Context.SaveChanges();
+            await _Context.AddAsync(entity);
+            return await _Context.SaveChangesAsync();
         }
-        public int Update(T entity)
+        public async Task<int> UpdateAsync(T entity)
         {
             _Context.Update(entity);
-            return _Context.SaveChanges();
+            return await _Context.SaveChangesAsync();
         }
 
-        public int Delete(T entity)
+        public async Task<int> DeleteAsync(T entity)
         {
             _Context.Remove(entity);
-            return _Context.SaveChanges();
+            return await _Context.SaveChangesAsync();
         }
 
-        public T Get(int id)
+        public async Task<T> GetAsync(int id)
         {
-            return _Context.Set<T>().Find(id);
+            return await _Context.Set<T>().FindAsync(id);
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             if (typeof(T) == typeof(Employee)){
 
-                return (IEnumerable<T>)_Context.Employees.Include(E=>E.WorkFor).AsNoTracking().ToList();
+                return  (IEnumerable<T>) await _Context.Employees.Include(E=>E.WorkFor).AsNoTracking().ToListAsync();
 
             }
             else
-            return _Context.Set<T>().ToList();
+            return await _Context.Set<T>().ToListAsync();
         }
 
-
+       
     }
 }

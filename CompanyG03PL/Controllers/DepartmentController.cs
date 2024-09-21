@@ -1,10 +1,12 @@
 ﻿using CompanyG03BLL.Interface;
 using CompanyG03BLL.Repositories;
 using CompanyG03DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanyG03PL.Controllers
 {
+    [Authorize]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRepository repository;
@@ -15,11 +17,13 @@ namespace CompanyG03PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
-        {
-            var departments = repository.GetAll();
+        
 
-            return View(departments);
+        public async Task<IActionResult> Index()
+        {
+            var departments = await repository.GetAllAsync();
+
+            return  View(departments);
         }
         [HttpGet]
         public IActionResult Create()
@@ -28,28 +32,28 @@ namespace CompanyG03PL.Controllers
 
         }
         [HttpPost]
-        public IActionResult Create(Department model)
+        public async Task<IActionResult> Create(Department model)
         {
             if (ModelState.IsValid)
             {
-                var count = repository.Add(model);
+                var count = await repository.AddAsync(model);
                 if (count > 0)
                 {
 
-                    return RedirectToAction(nameof(Index));
+                    return  RedirectToAction(nameof(Index));
                 }
 
             }
             return View(model);
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id is null)
                 return BadRequest();
             else
             {
-                var result = repository.Get(id.Value);
+                var result = await repository.GetAsync(id.Value);
                 return View(result);
 
             }
@@ -57,14 +61,14 @@ namespace CompanyG03PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id is null)
             {
                 return BadRequest();
             }
 
-            var result = repository.Get(id.Value);
+            var result = await repository.GetAsync(id.Value);
             if (result == null)
             {
                 return NotFound();
@@ -75,7 +79,7 @@ namespace CompanyG03PL.Controllers
 
 
         [HttpPost]
-        public IActionResult Edit(Department model, int? id)
+        public async Task<IActionResult> Edit(Department model, int? id)
         {
 
             if (id is null || !ModelState.IsValid)
@@ -85,12 +89,12 @@ namespace CompanyG03PL.Controllers
                     return BadRequest();
                 }
 
-                var result = repository.Get(id.Value);
+                var result = await repository.GetAsync(id.Value);
                 return View(result);
             }
 
 
-            var count = repository.Update(model);
+            var count = await repository.UpdateAsync(model);
             if (count > 0)
             {
                 return RedirectToAction(nameof(Index));
@@ -101,7 +105,7 @@ namespace CompanyG03PL.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
 
             if (id is null)
@@ -109,7 +113,7 @@ namespace CompanyG03PL.Controllers
                 return BadRequest();
             }
 
-            var result = repository.Get(id.Value);
+            var result = await repository.GetAsync(id.Value);
             if (result == null)
             {
                 return NotFound();
@@ -122,7 +126,7 @@ namespace CompanyG03PL.Controllers
 
 
         [HttpPost]
-        public IActionResult Delete(Department model, int? id)
+        public async Task<IActionResult> Delete(Department model, int? id)
         {
 
             if (id is null || !ModelState.IsValid)
@@ -132,12 +136,12 @@ namespace CompanyG03PL.Controllers
                     return BadRequest();
                 }
 
-                var result = repository.Get(id.Value);
+                var result = await repository.GetAsync(id.Value);
                 return View(result);
             }
 
 
-            var count = repository.Delete(model);
+            var count = await repository.DeleteAsync(model);
             if (count > 0)
             {
                 return RedirectToAction(nameof(Index));
