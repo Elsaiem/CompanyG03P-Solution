@@ -9,10 +9,10 @@ namespace CompanyG03DAL.Models
 {
     public class Employee:BaseEntity
     {
-     
-      
 
-     
+
+
+
         public string Name { get; set; }
 
         public int? Age { get; set; }
@@ -20,6 +20,7 @@ namespace CompanyG03DAL.Models
         public decimal Salary { get; set; }
 
         public string Email { get; set; }
+        public string? ImageName { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsActive { get; set; }
 

@@ -2,8 +2,10 @@ using CompanyG03BLL;
 using CompanyG03BLL.Interface;
 using CompanyG03BLL.Repositories;
 using CompanyG03DAL.Data.Contexts;
+using CompanyG03DAL.Models;
 using CompanyG03PL.Mapping;
 using CompanyG03PL.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -26,7 +28,7 @@ namespace CompanyG03PL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-            //builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();//Allow For DI fro deparmtent depository to create 
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();//Allow For DI fro deparmtent depository to create 
             //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();//Allow For DI fro deparmtent depository to create 
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 
@@ -42,7 +44,7 @@ namespace CompanyG03PL
 
 
 
-
+            builder.Services.AddIdentity<ApllicationUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
 
 

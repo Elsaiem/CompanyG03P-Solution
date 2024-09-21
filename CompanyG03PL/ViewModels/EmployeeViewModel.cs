@@ -6,6 +6,7 @@ namespace CompanyG03PL.ViewModels
     public class EmployeeViewModel
     {
 
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Name is Requierd")]
         public string Name { get; set; }
@@ -31,9 +32,9 @@ namespace CompanyG03PL.ViewModels
         public int? WorkForId { get; set; } //FK
         public Department? WorkFor { get; set; }//NavigationalProp
 
-
-
-
+        public IFormFile? Image { get; set; }
+        
+        public string? ImageName { get; set; }
 
 
     }

@@ -1,4 +1,5 @@
-﻿@model Employee
+﻿@using CompanyG03PL.ViewModels
+@model EmployeeViewModel
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -47,8 +48,13 @@
     <span asp-validation-for="HireDate" class="text-danger"></span>
 </div>
 <div class="form-group">
-    <label asp-for="HireDate" class="col-form-label">Department</label>
+    <label asp-for="WorkForId" class="col-form-label">Department</label>
     <select asp-for="WorkForId" asp-items="department" class="form-control" >
         <option value="@null">---Select Department---</option>
     </select>
+</div>
+<div class="form-group">
+    <label asp-for="Image" class="col-form-label">Upload Image</label>
+    <input type="file" asp-for="Image" class="form-control" />
+  
 </div>
