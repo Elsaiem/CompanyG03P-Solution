@@ -17,9 +17,7 @@ namespace CompanyG03PL.Controllers
         }
 
         [HttpGet]
-        
-
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var departments = await repository.GetAllAsync();
 

@@ -30,13 +30,22 @@ namespace CompanyG03PL.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-      
-
-        public async Task<IActionResult> Index(string searchInput)
+       
+        public IActionResult Index(string searchInput)
         {
-            //   var employees=Enumerable.Empty<Employee>();
-            //   var employeesViewModel = new Collection<EmployeeViewModel>();
-            //   employees = mapper.Map<Employee>(employeesViewModel);
+            var employees=Enumerable.Empty<Employee>();
+            var employeesViewModel = new Collection<EmployeeViewModel>();
+
+            if (string.IsNullOrEmpty(searchInput))
+            {
+                 employees=unitOfWork.EmployeeRepository.GetAll();
+            }
+            else
+            {
+                employees= unitOfWork.EmployeeRepository.GetByName(searchInput);
+            }
+            //Auto Mapping
+           var result= mapper.Map<IEnumerable<EmployeeViewModel>>(employees); 
 
             //   if (string.IsNullOrEmpty(searchInput))
             //   {
@@ -52,37 +61,23 @@ namespace CompanyG03PL.Controllers
 
 
 
-
-            //   // employees = repository.GetAll();
-            //   //string Message = "hello World";
-            //   // view dictionary :Transfer Data from Action To View[One Way]
-            //   //you can  call View Dictionary by Three Ways
-            //   //1-View Data : Property Inherted From C  ViewData["Message"] = Message;
-            ////   ViewData["Message"] = Message + "From View Data";
+            // employees = repository.GetAll();
+            //string Message = "hello World";
+            // view dictionary :Transfer Data from Action To View[One Way]
+            //you can  call View Dictionary by Three Ways
+            //1-View Data : Property Inherted From C  ViewData["Message"] = Message;
+         //   ViewData["Message"] = Message + "From View Data";
+            
+         //   //2-ViewBag   : Property Inherted From Controller - Dynamic
+         //ViewBag.Message=Message + "From View Bag";
 
             ////   //2-ViewBag   : Property Inherted From Controller - Dynamic
             ////ViewBag.Message=Message + "From View Bag";
 
-
-            ////   //3-TempData  : Property Inherted From Controller - Dictionary
-            ////   TempData["Message"]=Message + "From TempData";
-
-            //   return View(employees);
-            var employees = Enumerable.Empty<Employee>();
-
-            if (string.IsNullOrEmpty(searchInput))
-            {
-                employees = await unitOfWork.EmployeeRepository.GetAllAsync();
-            }
-            else
-            {
-                employees =await unitOfWork.EmployeeRepository.GetByNameAsync(searchInput);
-            }
-
-            // Auto Mapping from Employee to EmployeeViewModel
-            var employeesViewModel = mapper.Map<IEnumerable<EmployeeViewModel>>(employees);
-
-            return View(employeesViewModel);
+         //   //3-TempData  : Property Inherted From Controller - Dictionary
+         //   TempData["Message"]=Message + "From TempData";
+             
+            return View(employees);
         }
         [HttpGet]
         public async Task<IActionResult> Create()

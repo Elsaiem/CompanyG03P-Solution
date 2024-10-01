@@ -9,12 +9,12 @@
 <div class="main-agileinfo">
 	<div class="agileits-top">
 		<form action="SignUp" method="post">
-			<input class="text" asp-for="UserName" placeholder="Username" requierd>
-			<input class="text" asp-for="FirstName" placeholder="First Name" requierd>
-			<input class="text"  asp-for="LastName" placeholder="Last Name" requierd>
-			<input class="text email"  asp-for="Email" placeholder="Email"requierd>
-			<input class="text"  asp-for="Password" placeholder="Password"requierd>
-			<input class="text w3lpass"asp-for="ConfirmPassword" placeholder="Confirm Password" requierd>
+			<input class="text" asp-for="UserName" placeholder="Username" >
+			<input class="text" asp-for="FirstName" placeholder="First Name" >
+			<input class="text"  asp-for="LastName" placeholder="Last Name" >
+			<input class="text email"  asp-for="Email" placeholder="Email">
+			<input class="text"  asp-for="Password" placeholder="Password">
+			<input class="text w3lpass"asp-for="ConfirmPassword" placeholder="Confirm Password" >
 			<div class="wthree-text">
 				<label class="anim">
 					<input  asp-for="IsAgree" class="checkbox" >
@@ -24,6 +24,5 @@
 			</div>
 			<input type="submit" value="SIGNUP">
 		</form>
-		<p>You Alreaady have account <a asp-action="SignIn"> Login Now!</a></p>
 	</div>
 </div>

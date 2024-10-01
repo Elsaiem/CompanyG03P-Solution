@@ -5,9 +5,7 @@ using CompanyG03DAL.Data.Contexts;
 using CompanyG03DAL.Models;
 using CompanyG03PL.Mapping;
 using CompanyG03PL.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -46,10 +44,7 @@ namespace CompanyG03PL
 
 
 
-            builder.Services.AddIdentity<ApllicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
-
+            builder.Services.AddIdentity<ApllicationUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
 
 

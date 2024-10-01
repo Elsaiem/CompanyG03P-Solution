@@ -11,17 +11,16 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pag
 namespace CompanyG03PL.Controllers
 {
     [AllowAnonymous]
-    public class AccountController : Controller
+	public class AccountController : Controller
 	{
 		private readonly UserManager<ApllicationUser> _userManager; // Fixed semicolon
         private readonly SignInManager<ApllicationUser> _signInManager;
 
-        // Constructor
-        public AccountController(UserManager<ApllicationUser> userManager,SignInManager<ApllicationUser> signInManager) // Fixed parameter name and assignment
+		// Constructor
 		{
 			_userManager = userManager;
             _signInManager = signInManager;
-        }
+		}
 
 		// GET: SignUp
 		#region Sign Up
@@ -37,11 +36,8 @@ namespace CompanyG03PL.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				var result = await _userManager.FindByNameAsync(model.UserName);
-
-				if (result is null)
+			
 				{
-					result = await _userManager.FindByEmailAsync(model.Email);
 					//mapping
 					if (result is null)
 					{
@@ -71,10 +67,10 @@ namespace CompanyG03PL.Controllers
 
 
 				ModelState.AddModelError(string.Empty, "username is Aleady Exist");
-
-
+			
+			
 			}
-
+			
 
 			return View(model); // Return the model to show validation errors if needed
 		}
@@ -179,7 +175,7 @@ namespace CompanyG03PL.Controllers
 		public IActionResult CheckYourInbox()
 		{
 			return View();
-		}
+	}
 
 
 
